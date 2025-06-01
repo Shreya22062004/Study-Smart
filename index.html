@@ -165,6 +165,13 @@
     </div>
 
     <script>
+        // Load tasks and notes from localStorage on page load
+        window.onload = function() {
+            loadTasks();
+            loadNotes();
+        };
+
+        // Add a task to the list and store it in localStorage
         function addTask() {
             const taskInput = document.getElementById("taskInput");
             const taskList = document.getElementById("taskList");
@@ -173,14 +180,47 @@
                 li.textContent = taskInput.value;
                 const delBtn = document.createElement("button");
                 delBtn.textContent = "❌";
-                delBtn.onclick = () => li.remove();
+                delBtn.onclick = () => {
+                    li.remove();
+                    updateTaskStorage();
+                };
                 delBtn.style.marginLeft = "1rem";
                 li.appendChild(delBtn);
                 taskList.appendChild(li);
                 taskInput.value = "";
+                updateTaskStorage();
             }
         }
 
+        // Update localStorage with current task list
+        function updateTaskStorage() {
+            const tasks = [];
+            document.querySelectorAll("#taskList li").forEach((li) => {
+                tasks.push(li.textContent.replace("❌", "").trim());
+            });
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+        }
+
+        // Load tasks from localStorage
+        function loadTasks() {
+            const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+            const taskList = document.getElementById("taskList");
+            tasks.forEach((task) => {
+                const li = document.createElement("li");
+                li.textContent = task;
+                const delBtn = document.createElement("button");
+                delBtn.textContent = "❌";
+                delBtn.onclick = () => {
+                    li.remove();
+                    updateTaskStorage();
+                };
+                delBtn.style.marginLeft = "1rem";
+                li.appendChild(delBtn);
+                taskList.appendChild(li);
+            });
+        }
+
+        // Add a note and store it in localStorage
         function addNote() {
             const noteText = document.getElementById("noteText");
             const noteList = document.getElementById("noteList");
@@ -190,7 +230,29 @@
                 div.textContent = noteText.value;
                 noteList.appendChild(div);
                 noteText.value = "";
+                updateNoteStorage();
             }
+        }
+
+        // Update localStorage with current notes list
+        function updateNoteStorage() {
+            const notes = [];
+            document.querySelectorAll(".note").forEach((note) => {
+                notes.push(note.textContent.trim());
+            });
+            localStorage.setItem("notes", JSON.stringify(notes));
+        }
+
+        // Load notes from localStorage
+        function loadNotes() {
+            const notes = JSON.parse(localStorage.getItem("notes")) || [];
+            const noteList = document.getElementById("noteList");
+            notes.forEach((note) => {
+                const div = document.createElement("div");
+                div.className = "note";
+                div.textContent = note;
+                noteList.appendChild(div);
+            });
         }
     </script>
 </body>
