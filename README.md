@@ -1,2 +1,15 @@
-# Study-Smart
-StudySmart is a web-based dashboard designed to help students manage tasks, take notes, and stay organized. With a smart to-do list and interactive features, it offers a vibrant, user-friendly interface to boost productivity and streamline study habits.
+
+StudySmart - Student Dashboard
+StudySmart is a web-based tool designed to help students stay organized and productive. With features like a smart to-do list, note-taking, and a clean, modern interface, it helps students manage tasks and track their academic progress efficiently.
+
+Features
+Smart To-Do List: Easily add, remove, and track tasks.
+
+Notes Section: Save and organize important notes.
+
+User-Friendly Interface: Clean, vibrant design to enhance focus and productivity.
+
+Technologies Used
+HTML, CSS, JavaScript
+
+Responsive design for mobile and desktop use
