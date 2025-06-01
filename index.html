@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudySmart - Student Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f1f8ff; /* Soft Blue */
+            margin: 0;
+            padding: 0;
+            color: #333;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        header {
+            background-color: #0077b6; /* Ocean Blue */
+            color: white;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            animation: slideIn 1s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 2rem;
+        }
+
+        .section {
+            background: #fff;
+            color: #333;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: bounceIn 1s ease-out;
+        }
+
+        @keyframes bounceIn {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .section:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            color: #0077b6; /* Ocean Blue */
+            margin-bottom: 1rem;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus, textarea:focus {
+            border-color: #ff6f61; /* Sunset Orange */
+            outline: none;
+        }
+
+        button {
+            background: #ff6f61; /* Sunset Orange */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background: #ff4f40; /* Darker Sunset Orange */
+            transform: scale(1.05);
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #f5d9ea;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.2s ease;
+        }
+
+        li:hover {
+            transform: translateX(5px);
+            background: #fbc8d4;
+        }
+
+        .note {
+            background: #d6f0ff;
+            border-left: 6px solid #00aaff; /* Light Ocean Blue */
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            transition: background 0.3s ease;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .note:hover {
+            background: #c4e3f8;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        🎓 StudySmart - Smart Study Hub for Students
+    </header>
+
+    <div class="container">
+
+        <!-- Smart To-Do List -->
+        <div class="section">
+            <h2>Smart To-Do List</h2>
+            <input type="text" id="taskInput" placeholder="Enter a task">
+            <button onclick="addTask()">Add Task</button>
+            <ul id="taskList"></ul>
+        </div>
+
+        <!-- Smart Notes Section -->
+        <div class="section">
+            <h2>Notes</h2>
+            <textarea id="noteText" rows="4" placeholder="Write your notes here..."></textarea>
+            <button onclick="addNote()">Save Note</button>
+            <div id="noteList"></div>
+        </div>
+
+    </div>
+
+    <script>
+        function addTask() {
+            const taskInput = document.getElementById("taskInput");
+            const taskList = document.getElementById("taskList");
+            if (taskInput.value.trim() !== "") {
+                const li = document.createElement("li");
+                li.textContent = taskInput.value;
+                const delBtn = document.createElement("button");
+                delBtn.textContent = "❌";
+                delBtn.onclick = () => li.remove();
+                delBtn.style.marginLeft = "1rem";
+                li.appendChild(delBtn);
+                taskList.appendChild(li);
+                taskInput.value = "";
+            }
+        }
+
+        function addNote() {
+            const noteText = document.getElementById("noteText");
+            const noteList = document.getElementById("noteList");
+            if (noteText.value.trim() !== "") {
+                const div = document.createElement("div");
+                div.className = "note";
+                div.textContent = noteText.value;
+                noteList.appendChild(div);
+                noteText.value = "";
+            }
+        }
+    </script>
+</body>
+
+</html>
+
+
+
+
+
